@@ -10,7 +10,7 @@ Os requisitos funcionais e técnicos podem ser encontrados no [repositório ofic
 
 Para rodar a aplicação na sua máquina local, primeiro, realize o clone do repositório
 ```
-git clone https://github.com/fabiopsy/pricefy-frontend-test/tree/pricefy
+git clone https://github.com/fabiopsy/frontend-test-angular.git
 ```
 Instale as dependências npm descritas no `package.json` e rode a aplicação com `ng s`.
 ```bash
