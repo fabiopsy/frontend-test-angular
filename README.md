@@ -1,4 +1,4 @@
-# Desafio técnico para a vaga de Desenvolvedor Front Jr. Pela Pricefy
+# Desafio técnico para a vaga de Desenvolvedor Front. Pela Pricefy
 
 Neste desafio desenvolvido em `Angular/TypeScript`, foram utilizados vários recursos e conceitos que o Angular oferece, como `Modularização, Reactive Forms, Roteamento, DataBinding, Interpolação, Pipes, etc`.
 
