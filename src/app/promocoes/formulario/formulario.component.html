@@ -1,0 +1,125 @@
+<div class="card-header">
+    <span class="title-form-btn" (click)="voltar()"><i class="bi bi-chevron-left"></i> VOLTAR</span>
+    <span class="title-form float-end"><i class="bi bi-tag-fill"></i> Nova Promoção</span>
+</div>
+
+<div class="card-body">
+    <form action="" [formGroup]="formulario" (ngSubmit)="onSavePromocao()">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" id="inputGtin" class="form-control" placeholder="GTIN/EAN"
+                            formControlName="gtin" maxlength="14" mask="00000000000000" autofocus
+                            [ngClass]="aplicaCssErro('gtin')">
+                        <label>GTIN/EAN</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-warning"><i class="bi bi-exclamation-triangle-fill"></i> Todos os campos são
+                    obrigatórios</span>
+            </div>
+
+            <div class="col-12">
+                <div class="form-floating mb-2">
+                    <textarea class="form-control" id="inputDescricao" placeholder="Descrição"
+                        formControlName="descricao" #textoCounter maxlength="{{ maxLengthDescricao }}"
+                        [ngClass]="aplicaCssErro('descricao')"></textarea>
+                    <label>Descrição</label>
+                    <p class="text-danger text-end text-counter">{{ textoCounter.value.length }}/{{
+                        maxLengthDescricao }}</p>
+                </div>
+            </div>
+
+            <div class="input-group mb-2">
+                <label class="input-group-text"><i class="bi bi-tag"></i></label>
+                <select class="form-select" id="inputCategoria" formControlName="categoria"
+                    [ngClass]="aplicaCssErro('categoria')">
+                    <option value="0" selected disabled>Selecione a categoria</option>
+                    <option value="Periféricos">Periféricos</option>
+                    <option value="Cadeiras Gammer">Cadeiras Gammer</option>
+                    <option value="Monitores">Monitores</option>
+                    <option value="Gabinetes">Gabinetes</option>
+                    <option value="Placas de Vídeo">Placas de Vídeo</option>
+                    <option value="Headsets">Headsets</option>
+                    <option value="Teclado e Mouse">Teclado e Mouse</option>
+                </select>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="bi bi-cash-coin"></i></span>
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" id="inputPrecoRegular" class="form-control" placeholder="Preço Regular"
+                            formControlName="precoRegular" currencyMask [ngClass]="aplicaCssErro('precoRegular')">
+                        <label>Preço Regular</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="bi bi-piggy-bank"></i></span>
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" id="inputPrecoPromocional" class="form-control"
+                            placeholder="Preço Promocional" formControlName="precoPromocional" currencyMask
+                            [ngClass]="aplicaCssErro('precoPromocional')">
+                        <label>Preço Promocional</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" *ngIf="exibeErroPreco">
+                <div class="alert alert-danger" role="alert">
+                    O Preço Promocional <strong>não pode ser maior</strong> do que o Preço Regular
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="bi bi-calendar2-check"></i></span>
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" id="inputDataInicial" class="form-control" placeholder="Data Inicial"
+                            formControlName="dataInicial" mask="{{maskDatas}}" [leadZeroDateTime]="true"
+                            [dropSpecialCharacters]="false" [showMaskTyped]="true" [ngClass]="aplicaCssErro('dataInicial')" />
+                        <label>Data Inicial</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="bi bi-calendar2-x"></i></span>
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" id="inputDataFinal" class="form-control" placeholder="Data Final"
+                            formControlName="dataFinal" mask="{{maskDatas}}" [leadZeroDateTime]="true"
+                            [dropSpecialCharacters]="false" [showMaskTyped]="true" [ngClass]="aplicaCssErro('dataFinal')" />
+                        <label>Data Final</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" *ngIf="exibeErroData">
+                <div class="alert alert-danger" role="alert">
+                    A Data Final <strong>não pode ser anterior</strong> à Data Inicial
+                </div>
+            </div>
+
+            <div class="col-lg-12" *ngIf="exibeErroRetroativa">
+                <div class="alert alert-danger" role="alert">
+                    A Data Final <strong>não pode uma data passada</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-primary btn-pricefy btn-lg" type="submit">Cadastrar</button> 
+            <button class="btn btn-outline-secondary btn-lg btn-cancel" type="button"
+                (click)="voltar()">Cancelar</button>
+        </div>
+    </form>
+
+</div>

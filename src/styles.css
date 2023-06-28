@@ -1,0 +1,13 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url("~bootstrap-icons/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+body {
+    background-color: #e9edf4;
+    color: #676a6c;
+    font-size: 13px;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+  }

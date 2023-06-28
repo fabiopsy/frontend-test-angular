@@ -1,0 +1,72 @@
+.card {
+    border: none;
+    border-radius: 0%;
+}
+
+.card-header {
+    background-color: #71aba6;
+    color: #fff;
+    border-bottom: none;
+    padding: 18px 15px 18px;
+    border-radius: 0%;
+}
+
+.card-header-off {
+    background-color: #e78380;
+}
+
+button.btn-pricefy {
+    font-size: 15px;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+button {
+    box-shadow: none !important;
+}
+
+.btn-pricefy {
+    background: #0b877d;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.text-pricefy {
+    color: #18c29c;
+}
+
+.badge {
+    font-weight: normal;
+}
+
+.text-barcode {
+    font-size: 11px;
+    color: #999999 !important;
+}
+
+.pos-footer {
+    position: relative;
+    top: 7px;
+}
+
+.btn-group-vertical{
+    border-left: 1px dashed #ccc;
+}
+
+small {
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.card-footer {
+    border: none;
+}
+
+strong {
+    font-weight: 600;
+}
+
+.btn-link {
+    cursor: pointer;
+}

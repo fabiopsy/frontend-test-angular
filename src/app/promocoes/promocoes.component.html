@@ -1,0 +1,87 @@
+<!-- BLOCO FILTRO -->
+<div class="row">
+    <div class="col-12">
+
+        <span *ngIf="blnToggleForm && promocoes.length > 0">
+            <i class="bi bi-funnel-fill"></i> Filtrando por <strong class="btn-link text-dark"
+                (click)="colunaFiltro = !colunaFiltro">{{!colunaFiltro ? "Data Inicial" : "Data Final"}}</strong>
+            (<a class="btn-link text-dark" (click)="ordemFiltro = !ordemFiltro">{{!ordemFiltro ? "do Menor para o Maior"
+                :
+                "do Maior para o Menor"}}</a>)
+        </span>
+
+        <button type="button" class="btn btn-primary btn-pricefy btn-lg float-end" (click)="toggleForm()"
+            *ngIf="blnToggleForm"><i class="bi bi-plus-circle me-1"></i> CADASTRAR PROMOÇÃO</button>
+    </div>
+</div>
+
+<!-- BLOCO LISTAGEM DAS PROMOÇÕES -->
+<div class="row row-cols-1 mt-3 mb-3 " *ngIf="blnToggleForm">
+
+    <div class="text-center" *ngIf="promocoes.length == 0">
+        <img src="assets/img/oops.png" alt="">
+        <h5 class="mt-3">Não existem promoções cadastradas!</h5>
+    </div>
+
+    <div class="col-xs-12 com-sm-6 col-lg-4 mb-3"
+        *ngFor="let promocao of promocoes | filtraPromocoes: !ordemFiltro ? 'asc' : 'desc' : !colunaFiltro ? 'dataInicial' : 'dataFinal'">
+        <div class="card">
+            <div class="card-header p-1 ps-2" [class.bg-danger]="verificaData(promocao.dataFinal)"></div>
+            <div class="card-body p-2 pb-0">
+                <div class="btn-group-vertical float-end ms-2 ps-2" role="group" aria-label="First group">
+                    <small class="">PREÇO REGULAR</small>
+                    <h6>R$ {{ promocao.precoRegular }}</h6>
+                    <small>PREÇO PROMO.</small>
+                    <h5><strong class="text-pricefy">R$ {{ promocao.precoPromocional }}</strong></h5>
+                </div>
+
+                <p class="card-text">
+                    {{ promocao.descricao }}
+                </p>
+                <span [class.text-danger]="verificaData(promocao.dataFinal)">{{promocao.dataInicial | date :
+                    'dd/MM/yyyy' : '' : 'pt-BR'}} · {{promocao.dataFinal | date : 'dd/MM/yyyy' : '' : 'pt-BR'}}</span>
+            </div>
+            <div class="card-footer bg-white py-1 px-2">
+                <span class="badge rounded-pill bg-secondary me-2 pos-footer">
+                    <i class="bi bi-tag-fill"></i> {{ promocao.categoria }}</span>
+
+                <span class="text-secondary text-barcode pos-footer"><i class="bi bi-upc-scan"></i>
+                    {{ promocao.gtin }}</span>
+
+                <div class="btn-group float-end" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-printer"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onClickEditar(promocao.id)">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#modalExcluir" (click)="promocaoId = promocao.id">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- BLOCO CADASTRAR PROMOÇÃO (FORMULÁRIO) -->
+<div class="card col-8 mx-auto" *ngIf="!blnToggleForm">
+    <app-formulario [promocaoId]="promocaoId" (fechaFormulario)="toggleForm()"></app-formulario>
+</div>
+
+<!-- MODAL EXCLUIR -->
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #fefdfd;">
+            <div class="modal-body text-center">
+                <img src="assets/img/warning.gif" width="220px" alt="">
+                <h6 class="mt-1 mb-3">Excluir Promoção?</h6>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger ms-2" data-bs-dismiss="modal"
+                    (click)="onClickExcluir(promocaoId)">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
